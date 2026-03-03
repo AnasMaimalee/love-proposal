@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import love from './assets/love.jpeg';     // Welcome: gentle/intimate
-import love1 from './assets/love1.jpeg';    // Proposal: joyful/happy
-import love3 from './assets/love2.jpeg';    // Success: proposal/engagement moment
+import love1 from './assets/love1.jpeg';   // Proposal: joyful/happy
+import love2 from './assets/love2.jpeg';   // Success: proposal/engagement moment (you renamed love3 → love2)
 
 import confetti from 'canvas-confetti';
 
@@ -11,6 +11,17 @@ function App() {
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const [noBlocked, setNoBlocked] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [begMessageIndex, setBegMessageIndex] = useState(-1); // -1 = no message yet
+
+  // Cute pleading messages (romantic + playful)
+  const beggingMessages = [
+    "Please don't break my heart like this... 🥺💔",
+    "One more chance? I promise to make you smile every day... 😔❤️",
+    "Without you, my forever feels empty... say yes please? 🌹",
+    "I'm begging with all my love — you're my everything 💕🙏",
+    "Just imagine us together forever... pretty please? 🥰",
+    "This is my last plead... I love you too much to give up yet 💍❤️"
+  ];
 
   const fireConfetti = () => {
     const duration = 5 * 1000;
@@ -66,6 +77,14 @@ function App() {
 
     setNoBlocked(true);
     setTimeout(() => setNoBlocked(false), 120);
+
+    // Show next begging message (up to the last one)
+    setBegMessageIndex((prev) => {
+      if (prev < beggingMessages.length - 1) {
+        return prev + 1;
+      }
+      return prev; // stay on last message
+    });
   };
 
   const handleYes = () => {
@@ -97,7 +116,7 @@ function App() {
           <h1>Yes… 💍❤️</h1>
 
           <div className="photo-frame large">
-            <img src={love3} alt="Our forever moment" />
+            <img src={love2} alt="Our forever moment" />
           </div>
 
           <p className="romantic-text">
@@ -187,6 +206,13 @@ function App() {
           No...
         </button>
       </div>
+
+      {/* Begging message appears here when she tries "No" */}
+      {begMessageIndex >= 0 && (
+        <p className="begging-message">
+          {beggingMessages[begMessageIndex]}
+        </p>
+      )}
 
       <p className="tiny-hint">
         (the "No" button is very shy today... 😌)
