@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import photo from './assets/love.jpeg'; // ← your photo
+import love from './assets/love.jpeg';     // Welcome: gentle/intimate
+import love1 from './assets/love1.jpeg';    // Proposal: joyful/happy
+import love3 from './assets/love2.jpeg';    // Success: proposal/engagement moment
 
 import confetti from 'canvas-confetti';
 
@@ -10,7 +12,6 @@ function App() {
   const [noBlocked, setNoBlocked] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  // Confetti explosion when she says yes
   const fireConfetti = () => {
     const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
@@ -45,7 +46,6 @@ function App() {
       });
     }, 250);
 
-    // Big final heart burst
     setTimeout(() => {
       confetti({
         particleCount: 150,
@@ -73,7 +73,6 @@ function App() {
     setSuccess(true);
   };
 
-  // Floating hearts in proposal stage
   useEffect(() => {
     if (stage === 'proposal' && !success) {
       const interval = setInterval(() => {
@@ -98,7 +97,7 @@ function App() {
           <h1>Yes… 💍❤️</h1>
 
           <div className="photo-frame large">
-            <img src={photo} alt="My forever love" />
+            <img src={love3} alt="Our forever moment" />
           </div>
 
           <p className="romantic-text">
@@ -129,10 +128,10 @@ function App() {
   if (stage === 'welcome') {
     return (
       <div className="container welcome">
-        <h3 className='sweethert'>My sweetheart Pretty ❤️</h3>
+        <h3 className="sweethert">My sweetheart Pretty ❤️</h3>
 
         <div className="photo-frame">
-          <img src={photo} alt="My heart" />
+          <img src={love} alt="My heart" />
         </div>
 
         <p className="message">
@@ -156,7 +155,7 @@ function App() {
       <h1>There's something I've been wanting to ask you...</h1>
 
       <div className="photo-frame small">
-        <img src={photo} alt="You" />
+        <img src={love1} alt="Our happy moments" />
       </div>
 
       <h2 className="question">
