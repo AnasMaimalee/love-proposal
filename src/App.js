@@ -129,7 +129,7 @@ function App() {
   if (stage === 'welcome') {
     return (
       <div className="container welcome">
-        <h1>My sweetest love ❤️</h1>
+        <h3>My sweeheart love ❤️</h3>
 
         <div className="photo-frame">
           <img src={photo} alt="My heart" />
